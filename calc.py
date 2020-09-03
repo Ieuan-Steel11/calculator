@@ -11,6 +11,7 @@ class Calculator:
         self.tk_user_calculation = tk.StringVar()
         self.string_user_calculation = ""
         self.answer = ""
+        self.string_calculation = ""
         # initialises variables for later use
 
         calc_label = tk.Label(self.root, bg="light slate grey", text="calculator", font="helvetica", width="30",
@@ -71,11 +72,14 @@ class Calculator:
         divide_button = tk.Button(self.root, text="÷", height="5", width="5", bg="light cyan",
                                   command=lambda: self.add_to_calculation("/")).grid(row=5, column=3)
 
-    def change_calculation(self):
-        self.tk_user_calculation.set(self.string_calculation)
+    def change_calculation(self, string_calculation):
+        self.tk_user_calculation.set(string_calculation)
 
-        self.tk_user_calculation = self.tk_user_calculation.replace("*", "x")
-        self.tk_user_calculation = self.tk_user_calculation.replace("/", "÷")
+        self.string_calculation = self.tk_user_calculation.get()
+        self.string_calculation = self.string_calculation.replace("*", "x")
+        self.string_calculation = self.string_calculation.replace("/", "÷")
+
+        self.tk_user_calculation.set(self.string_calculation)
         # so it uses the classical signs for multiplication and division adn not the ones python
         # requires to use the eval function
 
@@ -88,15 +92,16 @@ class Calculator:
         self.string_user_calculation = ""
         # resets both display and eval expressions when cleared
 
-    def evaluate_calculation(self):
+    def evaluate_calculation(self, string_user_calculation):
         try:
-            self.answer = eval(self.string_user_calculation)
+            self.answer = eval(string_user_calculation)
             self.change_calculation(str(self.answer))
         except ZeroDivisionError:
             # if they try to divide by 0 shows err msg
             self.change_calculation("Cannot Divide by 0")
 
 
-r = tk.Tk()
-c = Calculator(r)
+root = tk.Tk()
+c = Calculator(root)
 c.root.mainloop()
+
