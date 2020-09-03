@@ -96,6 +96,9 @@ class Calculator:
         try:
             self.answer = eval(string_user_calculation)
             self.change_calculation(str(self.answer))
+        except SyntaxError:
+            # if they try to evaluate an empty string
+            self.change_calculation("Cannot evaluate empty expression")
         except ZeroDivisionError:
             # if they try to divide by 0 shows err msg
             self.change_calculation("Cannot Divide by 0")
