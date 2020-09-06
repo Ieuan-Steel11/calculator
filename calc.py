@@ -103,8 +103,9 @@ class Calculator:
             # if they try to divide by 0 shows err msg
             self.change_calculation("Cannot Divide by 0")
 
-
-root = tk.Tk()
-c = Calculator(root)
-c.root.mainloop()
+            
+if __name__ == "__main__":
+    root = tk.Tk()
+    c = Calculator(root)
+    c.root.mainloop()
 
